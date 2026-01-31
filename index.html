@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>אלון שיפוצים | סטנדרט חדש בשיפוצים</title>
+    <title>אלון שיפוצים | הבית שלך בידיים טובות</title>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0f172a; 
             --secondary: #334155; 
-            --accent: #f59e0b; 
-            --light: #f8fafc; 
+            --accent: #d97706; /* כתום עמוק יותר */
+            --light: #f1f5f9; 
             --white: #ffffff;
+            --success: #059669;
         }
         
         * { box-sizing: border-box; }
@@ -21,29 +22,31 @@
             font-family: 'Heebo', sans-serif;
             background-color: var(--light);
             color: var(--secondary);
-            padding-bottom: 90px;
+            padding-bottom: 100px;
             overflow-x: hidden;
         }
 
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%), 
-                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80');
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%), 
+                        url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
             color: var(--white);
-            padding: 100px 20px 70px;
+            padding: 110px 20px 80px;
             text-align: center;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 900;
             margin: 0 0 15px;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
             line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .hero p {
@@ -51,39 +54,38 @@
             font-weight: 300;
             opacity: 0.95;
             margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
+        /* Badge */
         .badge-container {
             display: flex;
             justify-content: center;
-            margin-top: -35px;
+            margin-top: -40px;
             position: relative;
             z-index: 10;
         }
 
         .rating-card {
             background: var(--white);
-            padding: 15px 35px;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 15px 40px;
+            border-radius: 60px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             gap: 15px;
             border: 2px solid var(--accent);
         }
 
-        .score {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
-
-        .stars { color: var(--accent); font-size: 1.1rem; }
+        .score { font-size: 2.2rem; font-weight: 900; color: var(--primary); }
+        .stars { color: var(--accent); letter-spacing: 2px; }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 60px 20px;
         }
 
         h2 {
@@ -91,9 +93,24 @@
             font-size: 2.2rem;
             color: var(--primary);
             margin-bottom: 40px;
-            font-weight: 700;
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 5px;
+            background: var(--accent);
+            margin: 10px auto 0;
+            border-radius: 10px;
         }
 
+        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -103,56 +120,110 @@
         .service-card {
             background: var(--white);
             padding: 35px;
-            border-radius: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            border-top: 6px solid transparent;
-            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
+            text-align: right;
+            border-right: 4px solid var(--accent);
         }
 
-        .icon { font-size: 3rem; margin-bottom: 20px; display: block; }
-        .service-card h3 { margin: 0 0 15px; color: var(--primary); font-size: 1.5rem; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .service-card h3 { margin: 10px 0; color: var(--primary); font-size: 1.4rem; }
+        .icon-box { font-size: 2.5rem; background: var(--light); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 15px; margin-bottom: 15px; }
 
-        .stats {
+        /* Stats */
+        .stats-bar {
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            padding: 40px 20px;
             display: flex;
             justify-content: space-around;
             text-align: center;
-            margin: 70px 0;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+            margin: 60px 0;
+            flex-wrap: wrap;
+            gap: 20px;
         }
-        .stat-number { font-size: 2.2rem; font-weight: 900; color: var(--accent); display: block; }
-        .stat-label { font-size: 1rem; font-weight: 700; color: var(--primary); margin-top: 5px; }
+        .stat-item h4 { font-size: 2.5rem; margin: 0; color: var(--accent); }
+        .stat-item p { margin: 5px 0 0; opacity: 0.8; font-weight: 300; }
 
-        .gallery-preview {
+        /* Expanded Gallery */
+        .gallery-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr); /* 2 בטור בנייד */
             gap: 15px;
-            margin-top: 25px;
         }
+        
+        /* בטאבלט ומעלה - 4 בטור */
+        @media (min-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
         .gallery-item {
-            height: 180px;
+            height: 200px;
             border-radius: 15px;
             background-size: cover;
             background-position: center;
-            background-color: #ddd;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-label {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+            backdrop-filter: blur(4px);
         }
 
+        /* Reviews */
+        .reviews {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            padding-top: 10px;
+            -webkit-overflow-scrolling: touch; /* גלילה חלקה בנייד */
+        }
+        
+        .review-card {
+            min-width: 280px;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .client-name { font-weight: bold; color: var(--primary); margin-top: 15px; display: block; font-size: 0.9rem; }
+        .quote-icon { font-size: 2rem; color: var(--accent); opacity: 0.3; line-height: 0; }
+
+        /* Steps */
+        .steps { margin-top: 60px; text-align: center; }
+        .step-item { background: white; padding: 20px; margin-bottom: 15px; border-radius: 15px; display: flex; align-items: center; gap: 15px; text-align: right; }
+        .step-num { background: var(--primary); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+
+        /* Sticky Actions */
         .sticky-actions {
             position: fixed;
             bottom: 20px;
             left: 20px;
             right: 20px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 12px;
+            padding: 10px;
             border-radius: 100px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
             display: flex;
-            justify-content: space-between;
-            gap: 12px;
+            gap: 10px;
             z-index: 1000;
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
         }
 
         .action-btn {
@@ -166,11 +237,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            transition: transform 0.2s;
         }
 
         .btn-wa { background: #25D366; color: white; }
         .btn-call { background: var(--primary); color: white; }
+        .action-btn:active { transform: scale(0.96); }
 
     </style>
 </head>
@@ -178,7 +251,7 @@
 
 <div class="hero">
     <h1>אלון שיפוצים</h1>
-    <p>אומנות השיפוץ והגמר בראשון לציון</p>
+    <p>להפוך את הבית שלך ליצירת אומנות, בראש שקט ובאחריות מלאה.</p>
 </div>
 
 <div class="badge-container">
@@ -192,48 +265,91 @@
 </div>
 
 <div class="container">
-    
-    <div class="stats">
-        <div>
-            <span class="stat-number">100%</span>
-            <span class="stat-label">שביעות רצון</span>
-        </div>
-        <div>
-            <span class="stat-number">VIP</span>
-            <span class="stat-label">יחס אישי</span>
-        </div>
-    </div>
 
-    <h2>המומחיות שלי</h2>
     <div class="services-grid">
         <div class="service-card">
-            <span class="icon">🏗️</span>
-            <h3>שיפוץ קומפלט</h3>
-            <p>ניהול פרויקט מלא מהריסה ועד מפתח.</p>
+            <div class="icon-box">🏗️</div>
+            <h3>שיפוץ מקיף (קומפלט)</h3>
+            <p>הריסה, בנייה מחדש, תשתיות חשמל ואינסטלציה. הכל תחת קורת גג אחת.</p>
         </div>
         <div class="service-card">
-            <span class="icon">✨</span>
-            <h3>עבודות גמר</h3>
-            <p>צבע, שפכטל, עבודות גבס ועיצוב פנים.</p>
+            <div class="icon-box">🚿</div>
+            <h3>חדרי רחצה יוקרתיים</h3>
+            <p>הפיכת חדר הרחצה לספא הפרטי שלך. איטום, ריצוף וכלים סניטריים.</p>
         </div>
         <div class="service-card">
-            <span class="icon">🚿</span>
-            <h3>חדרי רחצה</h3>
-            <p>חידוש מלא של חדרי אמבטיה ושירותים.</p>
+            <div class="icon-box">🎨</div>
+            <h3>עבודות גמר וצבע</h3>
+            <p>שליכט צבעוני, החלקת קירות, עבודות גבס ועיצוב פנים ברמת גימור מושלמת.</p>
         </div>
     </div>
 
-    <h2 style="margin-top: 60px;">פרויקטים אחרונים</h2>
-    <p style="text-align: center;">הצצה קטנה לעבודות שלנו</p>
-    
-    <div class="gallery-preview">
-        <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1599619351208-3e6c839d6828?auto=format&fit=crop&w=600&q=80');"></div>
-        <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1552321334-547cd97f9640?auto=format&fit=crop&w=600&q=80');"></div>
+    <div class="stats-bar">
+        <div class="stat-item">
+            <h4>15+</h4>
+            <p>שנות ניסיון</p>
+        </div>
+        <div class="stat-item">
+            <h4>100%</h4>
+            <p>לקוחות מרוצים</p>
+        </div>
+        <div class="stat-item">
+            <h4>1</h4>
+            <p>אחריות לכל עבודה</p>
+        </div>
     </div>
+
+    <h2>פרויקטים נבחרים</h2>
+    <p style="text-align: center; margin-bottom: 25px;">איכות רואים בעיניים. הנה טעימה מהעבודות האחרונות:</p>
     
-    <div style="text-align: center; margin-top: 50px; padding: 20px; background: white; border-radius: 20px;">
-        <h3>ההתחייבות שלי:</h3>
-        <p>✅ עמידה בזמנים | ✅ עבודה נקייה | ✅ מחיר הוגן</p>
+    <div class="gallery-grid">
+        <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80');">
+            <div class="gallery-label">סלון מודרני</div>
+        </div>
+        <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1556911220-e8db8e155d54?auto=format&fit=crop&w=600&q=80');">
+            <div class="gallery-label">מטבח מעוצב</div>
+        </div>
+        <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=600&q=80');">
+            <div class="gallery-label">חדר רחצה</div>
+        </div>
+        <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=600&q=80');">
+            <div class="gallery-label">ריצוף ופרקט</div>
+        </div>
+    </div>
+
+    <h2 style="margin-top: 60px;">לקוחות מספרים</h2>
+    <div class="reviews">
+        <div class="review-card">
+            <span class="quote-icon">❝</span>
+            <p>"אלון הפך לנו את הבית. עמד בזמנים על הדקה, השאיר נקי כל יום, והתוצאה פשוט ואוו."</p>
+            <span class="client-name">רונן, ראשון לציון</span>
+        </div>
+        <div class="review-card">
+            <span class="quote-icon">❝</span>
+            <p>"מקצוען אמיתי. עשה לנו שיפוץ אמבטיה קומפלט. מחיר הוגן ושירות שאין דברים כאלה."</p>
+            <span class="client-name">מיכל, חולון</span>
+        </div>
+        <div class="review-card">
+            <span class="quote-icon">❝</span>
+            <p>"חיפשתי מישהו אמין לשיפוץ דירה להשקעה. אלון נתן פתרונות חכמים וחסך לי כסף."</p>
+            <span class="client-name">דני, בת ים</span>
+        </div>
+    </div>
+
+    <div class="steps">
+        <h3 style="color: var(--primary);">איך מתקדמים לשיפוץ?</h3>
+        <div class="step-item">
+            <div class="step-num">1</div>
+            <div>שיחת ייעוץ קצרה (ללא התחייבות)</div>
+        </div>
+        <div class="step-item">
+            <div class="step-num">2</div>
+            <div>פגישה בשטח והצעת מחיר מסודרת</div>
+        </div>
+        <div class="step-item">
+            <div class="step-num">3</div>
+            <div>יוצאים לדרך! הבית החדש שלך מחכה.</div>
+        </div>
     </div>
 
 </div>
@@ -242,12 +358,10 @@
     <a href="tel:0549361111" class="action-btn btn-call">
         <span>📞</span> חייג
     </a>
-    <a href="https://wa.me/972549361111?text=היי אלון, הגעתי דרך האתר החדש, אשמח להצעת מחיר" class="action-btn btn-wa">
+    <a href="https://wa.me/972549361111?text=היי אלון, התרשמתי מהעבודות באתר. אשמח לתאם פגישת ייעוץ." class="action-btn btn-wa">
         <span>💬</span> וואטסאפ
     </a>
 </div>
 
 </body>
 </html>
-
-
